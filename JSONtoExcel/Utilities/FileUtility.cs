@@ -94,7 +94,7 @@ namespace JSONtoExcel.Utilities
 
 		public static void WriteFile<T>(string filename, string subDirectory, byte[] bytes) where T : class
 		{
-			var path = GetFullPath_FromRelativePath<T>(filename, subDirectory);
+			var path = GetFullPath_FromRelativePath<T>(CleanFilename(filename, "_"), subDirectory);
 			var pathOnly = Path.GetDirectoryName(path);
 			Directory.CreateDirectory(pathOnly);
 			File.WriteAllBytes(path, bytes);
@@ -102,7 +102,7 @@ namespace JSONtoExcel.Utilities
 
 		public static void WriteFile<T>(string filename, string subDirectory, string contents) where T : class
 		{
-			var path = GetFullPath_FromRelativePath<T>(filename, subDirectory);
+			var path = GetFullPath_FromRelativePath<T>(CleanFilename(filename, "_"), subDirectory);
 			if (!Directory.Exists(path))
 			{
 				var dirName = Path.GetDirectoryName(path);
